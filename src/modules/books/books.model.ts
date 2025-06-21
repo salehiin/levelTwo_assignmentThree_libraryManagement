@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { IBook } from './book.interface';
+import { IBook } from './books.interface';
 
 
 

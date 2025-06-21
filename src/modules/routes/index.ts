@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import bookRoute from '../books/book.route';
+import bookRoute from '../books/books.route';
 import borrowRoute from '../borrow/borrow.route';
 
 

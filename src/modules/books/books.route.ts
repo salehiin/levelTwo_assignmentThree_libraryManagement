@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { bookController } from './book.controller';
+import { bookController } from './books.controller';
 
 
 
