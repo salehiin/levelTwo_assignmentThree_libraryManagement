@@ -15,21 +15,7 @@ const createBook = async (req: Request, res: Response) => {
             data
         });
 
-    } 
-    // catch (error) {
-
-    //     res.status(400).send({
-    //         message: error.message,
-    //         success: false,
-    //         error: {
-    //             name: error.name || 'Error',
-    //             // message: error.message || "An error occurred during book creation",
-    //             ...error,
-    //         },
-    //     });
-
-    // }
-     catch (error) {
+    }catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
 
     res.status(400).send({
@@ -52,19 +38,7 @@ const getBooks = async (req: Request, res: Response) => {
             message: 'Books retrieved successfully',
             data,
         });
-    } 
-    // catch (error) {
-    //     res.status(404).send({
-    //         message: error.message,
-    //         success: false,
-    //         error: {
-    //             name: error.name || 'NotFoundError',
-    //             message: error.message || 'No books matched the search criteria',
-    //         },
-    //     });
-
-    // }
-    catch (error) {
+    }catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
 
     res.status(400).send({
@@ -87,19 +61,7 @@ const getBookById = async (req: Request, res: Response) => {
             message: 'Book retrieved successfully',
             data,
         });
-    } 
-    // catch (error) {
-    //     res.status(404).send({
-    //         message: error.message,
-    //         success: false,
-    //         error: {
-    //             name: error.name || 'NotFoundError',
-    //             message: error.message || 'The requested book does not exist',
-    //         },
-    //     });
-
-    // }
-    catch (error) {
+    }catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
 
     res.status(400).send({
@@ -122,19 +84,7 @@ const updateBook = async (req: Request, res: Response) => {
             message: 'Book updated successfully',
             data,
         });
-    } 
-    // catch (error) {
-    //     res.status(400).send({
-    //         message: error.message,
-    //         success: false,
-    //         error: {
-    //             name: error.name || 'UpdateError',
-    //             message: error.message || 'Failed to update the book information',
-    //         },
-    //     });
-
-    // }
-    catch (error) {
+    }catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
 
     res.status(400).send({
@@ -158,18 +108,7 @@ const deleteBookById = async (req: Request, res: Response) => {
             message: 'Book deleted successfully',
             data: null,
         });
-    } 
-    // catch (error) {
-    //     res.status(400).send({
-    //         message: error.message,
-    //         success: false,
-    //         error: {
-    //             name: error.name || 'DeleteError',
-    //             message: error.message || 'Failed to delete the book',
-    //         },
-    //     });
-    // }
-    catch (error) {
+    }catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
 
     res.status(400).send({
