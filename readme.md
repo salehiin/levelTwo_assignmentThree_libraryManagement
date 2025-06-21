@@ -29,15 +29,15 @@ Video -3
 
 
 
-# 1 - api should books not book
+<!-- # 1 - api should books not book -->
 # 2 - "__v": 0
 # 3 - 6. Borrow a Book
-# 4 - Generic Error Response
+<!-- # 4 - Generic Error Response -->
 # 5 - If copies become 0, update available to false (implement this using a static method or instance method).
-# 6 - 2. Get All Books
-# 7 - 7. Borrowed Books Summary (Using Aggregation)
+<!-- # 6 - 2. Get All Books -->
+<!-- # 7 - 7. Borrowed Books Summary (Using Aggregation) -->
 # 8 - ✨ Bonus Section (10 Marks):
-    1. Error Handling: Handle invalid input, 404s, and validation errors clearly
+    <!-- 1. Error Handling: Handle invalid input, 404s, and validation errors clearly -->
     2. Video Explanation: Short recorded video explaining key features and logic.
     3. Documentation: Well-written README.md with setup and API details.
 
