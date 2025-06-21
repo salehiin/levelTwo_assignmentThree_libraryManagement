@@ -23,11 +23,26 @@ const createBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             data
         });
     }
+    // catch (error) {
+    //     res.status(400).send({
+    //         message: error.message,
+    //         success: false,
+    //         error: {
+    //             name: error.name || 'Error',
+    //             // message: error.message || "An error occurred during book creation",
+    //             ...error,
+    //         },
+    //     });
+    // }
     catch (error) {
+        const err = error instanceof Error ? error : new Error('Unknown error');
         res.status(400).send({
-            message: error.message,
+            message: err.message,
             success: false,
-            error: Object.assign({ name: error.name || 'Error' }, error),
+            error: {
+                name: err.name,
+                message: err.message,
+            },
         });
     }
 });
@@ -40,13 +55,24 @@ const getBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             data,
         });
     }
+    // catch (error) {
+    //     res.status(404).send({
+    //         message: error.message,
+    //         success: false,
+    //         error: {
+    //             name: error.name || 'NotFoundError',
+    //             message: error.message || 'No books matched the search criteria',
+    //         },
+    //     });
+    // }
     catch (error) {
-        res.status(404).send({
-            message: error.message,
+        const err = error instanceof Error ? error : new Error('Unknown error');
+        res.status(400).send({
+            message: err.message,
             success: false,
             error: {
-                name: error.name || 'NotFoundError',
-                message: error.message || 'No books matched the search criteria',
+                name: err.name,
+                message: err.message,
             },
         });
     }
@@ -61,13 +87,24 @@ const getBookById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             data,
         });
     }
+    // catch (error) {
+    //     res.status(404).send({
+    //         message: error.message,
+    //         success: false,
+    //         error: {
+    //             name: error.name || 'NotFoundError',
+    //             message: error.message || 'The requested book does not exist',
+    //         },
+    //     });
+    // }
     catch (error) {
-        res.status(404).send({
-            message: error.message,
+        const err = error instanceof Error ? error : new Error('Unknown error');
+        res.status(400).send({
+            message: err.message,
             success: false,
             error: {
-                name: error.name || 'NotFoundError',
-                message: error.message || 'The requested book does not exist',
+                name: err.name,
+                message: err.message,
             },
         });
     }
@@ -82,13 +119,24 @@ const updateBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             data,
         });
     }
+    // catch (error) {
+    //     res.status(400).send({
+    //         message: error.message,
+    //         success: false,
+    //         error: {
+    //             name: error.name || 'UpdateError',
+    //             message: error.message || 'Failed to update the book information',
+    //         },
+    //     });
+    // }
     catch (error) {
+        const err = error instanceof Error ? error : new Error('Unknown error');
         res.status(400).send({
-            message: error.message,
+            message: err.message,
             success: false,
             error: {
-                name: error.name || 'UpdateError',
-                message: error.message || 'Failed to update the book information',
+                name: err.name,
+                message: err.message,
             },
         });
     }
@@ -103,13 +151,24 @@ const deleteBookById = (req, res) => __awaiter(void 0, void 0, void 0, function*
             data: null,
         });
     }
+    // catch (error) {
+    //     res.status(400).send({
+    //         message: error.message,
+    //         success: false,
+    //         error: {
+    //             name: error.name || 'DeleteError',
+    //             message: error.message || 'Failed to delete the book',
+    //         },
+    //     });
+    // }
     catch (error) {
+        const err = error instanceof Error ? error : new Error('Unknown error');
         res.status(400).send({
-            message: error.message,
+            message: err.message,
             success: false,
             error: {
-                name: error.name || 'DeleteError',
-                message: error.message || 'Failed to delete the book',
+                name: err.name,
+                message: err.message,
             },
         });
     }
