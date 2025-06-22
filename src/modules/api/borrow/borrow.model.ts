@@ -7,7 +7,10 @@ const borrowSchema = new Schema<IBorrow, IBorrowModel>({
     book: { type: Schema.Types.ObjectId, required: true },
     quantity: { type: Number, min: 0, required: true },
     dueDate: { type: Date, required: true }
-}, { timestamps: true });
+}, { 
+    timestamps: true,
+    versionKey: false 
+ });
 
 
 borrowSchema.static('checkInventory', async function checkInventory(id, quantity) {

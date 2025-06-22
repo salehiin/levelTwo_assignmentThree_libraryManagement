@@ -1,14 +1,24 @@
 import { Request, Response } from 'express';
 import Borrow from './borrow.model';
+import Book from '../books/books.model';
 
 
 
 const createBorrow = async (req: Request, res: Response) => {
 
     try {
-        const checkInventory = await Borrow.checkInventory(req.body.book as string, req.body.quantity);
-        if (!checkInventory) throw new Error('Book not available');
+        
 
+        const updatedBook = await Book.checkAndUpdateInventory(
+            req.body.book,
+            req.body.quantity
+        );
+
+        if (!updatedBook) {
+            throw new Error('Not enough copies available');
+        }
+
+        // ✅ Create borrow record
         const borrow = await Borrow.create(req.body);
 
         res.send({
@@ -33,7 +43,7 @@ const createBorrow = async (req: Request, res: Response) => {
 };
 
 const getBorrows = async (req: Request, res: Response) => {
-    // const borrow = await Borrow.find();  
+   
     try {
         const summary = await Borrow.aggregate([
             {
@@ -44,7 +54,7 @@ const getBorrows = async (req: Request, res: Response) => {
             },
             {
                 $lookup: {
-                    from: 'books', // collection name must match actual MongoDB collection (usually plural and lowercase)
+                    from: 'books',
                     localField: '_id',
                     foreignField: '_id',
                     as: 'bookInfo'

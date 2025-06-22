@@ -1,127 +1,72 @@
-# library-management-nosql-backend
+# 📚 Library Management API (NoSQL - MongoDB + Express)
 
-https://level-two-assignment-three-library-zeta.vercel.app/
-https://level-two-assignment-three-library-zeta.vercel.app/
+An online library system built using **Express.js**, **MongoDB**, and **Mongoose** that supports book management and borrowing functionality.
 
+---
 
-# user
-# book - title - author - genre  - isbn - description (string) - copies (number) - available (boolean)
-# borrow - book (objectId) - quantity (number) - dueDate (date)
+## 🚀 Features
 
+- Create, Read, Update, Delete (CRUD) for books
+- Borrow books with inventory check
+- Aggregated summary of borrowed books
+- Error handling with consistent response format
+- Filtering, sorting, and limiting books via query
+- Built with modular architecture
 
-{
-    "name": "Shamima",
-    "email": "shamima@bb.bov.bd.com",
-    "phone": 845132,
-    "role": "User",
-    "password": "password"
-}
+---
 
-{
-  "quantity": 1,
-  "book": "",
-  "dueDate": "2025-06-29"
-}
+# API Endpoints
+1. Books
+- POST /api/books — create a new book
 
+- GET /api/books — get all books (supports ?filter=GENRE&sortBy=FIELD&sort=asc|desc&limit=NUMBER)
 
+- GET /api/books/:bookId — get book by ID
 
-Video -3
+- PATCH /api/books/:bookId — update book
 
+- DELETE /api/books/:bookId — delete book
 
+2. Borrow
+- POST /api/borrow — borrow a book
+- Payload: book (ObjectId), quantity (number), dueDate (ISO date)
 
-<!-- # 1 - api should books not book -->
-# 2 - "__v": 0
-# 3 - 6. Borrow a Book
-<!-- # 4 - Generic Error Response -->
-# 5 - If copies become 0, update available to false (implement this using a static method or instance method).
-<!-- # 6 - 2. Get All Books -->
-<!-- # 7 - 7. Borrowed Books Summary (Using Aggregation) -->
-# 8 - ✨ Bonus Section (10 Marks):
-    <!-- 1. Error Handling: Handle invalid input, 404s, and validation errors clearly -->
-    2. Video Explanation: Short recorded video explaining key features and logic.
-    3. Documentation: Well-written README.md with setup and API details.
+- GET /api/borrow — returns summary of all borrowed books
+- Shows book title, isbn, and total borrowed quantity
 
+---
 
-- video 6 - 15.00
+# Response Format
+- All responses follow this format:
 
+1. success: true or false
 
+2. message: brief status message
 
+3. data: actual payload or null
 
+4. error: error object (only on failure)
 
+---
 
-# borrow controller --------------------------------------------------------------------
-import { Request, Response } from "express";
-import Borrow from "./borrow.model";
+# Important Links
+- GitHub Repository Link: 
 
+- Live Deployment Link: 
 
+- Video Explanation: https://drive.google.com/file/d/1diIws8ZIIjh1HI0g1X2Bp8onZS-4lE_W/view
 
-const createBorrow = async (req: Request, res: Response) => {
-    // const borrow = await Borrow.create(req.body)
+---
 
-    // --------------------------
+# Tech Stack
+1. Node.js
 
-    try {
-await borrow.save();    
+2. Express.js
 
-    res.send({
-        success: true,
-        message: "Book borrowed successfully",
-        data: borrow
-    });
-    } catch (error) {
-const borrow = new Borrow(req.body);
-    const burrowInventory = await borrow.checkInventory(req.body.book);
-    if(!burrowInventory) throw new Error(`Book not available`)
-        res.send({
-            success: false,
-            message: "Book borrow un-successfull",
-            error,
-        });
-    }
+3. TypeScript
 
-    // ---------------------------
+4. MongoDB
 
-    const borrow = new Borrow(req.body);
-    const burrowInventory = await borrow.checkInventory(req.body.book);
-    if(!burrowInventory) throw new Error(`Book not available`)
+5. Mongoose
 
-    // await borrow.save();    
-
-    // res.send({
-    //     success: true,
-    //     message: "Book borrowed successfully",
-    //     data: borrow
-    // });
-};
-
-const getBorrows = async (req: Request, res: Response) => {
-    const borrow = await Borrow.find();  // get all borrowed books v5-29:30
-
-    res.send({
-        success: true,
-        message: "Borrowed books summary retrieved successfully",
-        data: borrow
-    });
-};
-
-// try {
-//         const bookId = req.params.bookId;
-//         const data = await Book.findByIdAndDelete(bookId);
-//         res.send({
-//             success: true,
-//             message: "Book deleted successfully",
-//             data: null,
-//         });
-//     } catch (error) {
-//         res.send({
-//             success: false,
-//             message: "Book deleted un-successfull",
-//             error,
-//         });
-//     }
-
-
-export const borrowController = {
-    createBorrow,
-    getBorrows
-}
+6. Vercel

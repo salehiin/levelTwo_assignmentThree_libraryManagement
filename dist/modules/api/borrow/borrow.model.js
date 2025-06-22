@@ -12,31 +12,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
-const mongoose_1 = __importDefault(require("mongoose"));
-const config_1 = __importDefault(require("./config"));
-const routes_1 = __importDefault(require("./modules/api/routes"));
-const app = (0, express_1.default)();
-app.use((0, cors_1.default)());
-app.use(express_1.default.json());
-app.use(routes_1.default);
-app.get('/', (req, res) => {
-    res.send({ success: true, message: 'Iam here with library management' });
+const mongoose_1 = require("mongoose");
+const books_model_1 = __importDefault(require("../books/books.model"));
+const borrowSchema = new mongoose_1.Schema({
+    book: { type: mongoose_1.Schema.Types.ObjectId, required: true },
+    quantity: { type: Number, min: 0, required: true },
+    dueDate: { type: Date, required: true }
+}, {
+    timestamps: true,
+    toJSON: {
+        transform(doc, ret) {
+            delete ret.__v;
+        },
+    },
 });
-app.listen(config_1.default.port, () => {
-    console.log('Server is running');
-});
-function server() {
+borrowSchema.static('checkInventory', function checkInventory(id, quantity) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            // console.log(config)
-            yield mongoose_1.default.connect(config_1.default.database_url);
-            console.log('Connected to database');
+        const item = yield books_model_1.default.findById(id);
+        if (!item)
+            throw new Error('Book not found');
+        if (item.copies < quantity) {
+            throw new Error('Book unavailable');
         }
-        catch (error) {
-            console.error(`Server error ${server}`);
-        }
+        return true;
     });
-}
-server();
+});
+const Borrow = (0, mongoose_1.model)('Borrow', borrowSchema);
+exports.default = Borrow;
